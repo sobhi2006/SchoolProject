@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Domain.Entities;
+using SchoolProject.Domain.Entities.Identity;
 using SchoolProject.Infrastructure.Data.Configurations;
 
 namespace SchoolProject.Infrastructure.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<User>(options)
 {
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Department> Departments => Set<Department>();
@@ -15,6 +17,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<InstructorSubject> InstructorSubjects => Set<InstructorSubject>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);       // It is very important to set configuration of IdentityUser if, we remove it that will to crash error
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(StudentConfiguration).Assembly);
     }
 }

@@ -20,4 +20,9 @@ public class DepartmentService(IDepartmentRepository departmentRepository) : IDe
                                               .FirstOrDefaultAsync();
         return department;
     }
+
+    public async Task<bool> IsDepartmentExist(Guid DepartmentId)
+    {
+        return await _departmentRepository.GetTableNoTracking().AnyAsync(d => d.Id == DepartmentId);
+    }
 }

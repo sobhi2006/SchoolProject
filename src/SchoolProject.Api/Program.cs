@@ -18,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddInfrastructureDependency();
 builder.Services.AddServiceDependency();
 builder.Services.AddCoreDependency();
+builder.Services.AddServiceRegistrations(builder.Configuration);
 
 
 builder.Services.AddCors(options =>
