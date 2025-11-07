@@ -8,5 +8,6 @@ public  partial class UserProfile : Profile
     {
         AddUserMapping();
         GetUserMapping();
+        UpdateUserMapping();
     }
 }

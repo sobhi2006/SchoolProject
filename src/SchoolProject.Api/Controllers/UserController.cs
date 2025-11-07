@@ -31,4 +31,11 @@ public class UserController : AppController
         var response = await Mediator.Send(new GetUserByIdQuery(id));
         return Ok(response);
     }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateUser([FromBody]UpdateUserCommand request)
+    {
+        var response = await Mediator.Send(request);
+        return Ok(response);
+    }
 }

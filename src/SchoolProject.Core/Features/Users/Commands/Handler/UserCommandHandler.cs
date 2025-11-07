@@ -7,10 +7,24 @@ using SchoolProject.Domain.Entities.Identity;
 
 namespace SchoolProject.Core.Features.Users.Commands.Handler;
 
-public class UserCommandHandler(IMapper mapper, UserManager<User> userManager) : ResponseHandler, IRequestHandler<AddUserCommand, Response<string>>
+public class UserCommandHandler(IMapper mapper, UserManager<User> userManager) : ResponseHandler,
+                             IRequestHandler<AddUserCommand, Response<string>>,
+                             IRequestHandler<UpdateUserCommand, Response<string>>
 {
     private readonly IMapper _mapper = mapper;
     private readonly UserManager<User> _userManager = userManager;
+
+    public async Task<Response<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    {
+        var User = await _userManager.FindByIdAsync(request.Id.ToString());
+        if (User is null)
+            return NotFound<string>("Student not found");
+
+        var UserMapped = _mapper.Map(request, User);
+        var result = await _userManager.UpdateAsync(UserMapped);
+        return !result.Succeeded ? BadRequest<string>("Not Updated") : Success<string>("Updated Successfully");
+    }
+
     async Task<Response<string>> IRequestHandler<AddUserCommand, Response<string>>.Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
