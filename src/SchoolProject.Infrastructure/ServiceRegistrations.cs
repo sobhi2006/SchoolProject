@@ -12,7 +12,6 @@ public static class ServiceRegistrations
     {
         services.AddIdentity<User, IdentityRole>(options =>
         {
-            // Default Password settings.
             options.Password.RequireDigit = true;
             options.Password.RequireLowercase = true;
             options.Password.RequireNonAlphanumeric = true;
@@ -25,7 +24,7 @@ public static class ServiceRegistrations
 
             options.User.AllowedUserNameCharacters =
                                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            options.User.RequireUniqueEmail = false;
+            options.User.RequireUniqueEmail = true;
 
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             options.Lockout.MaxFailedAccessAttempts = 5;
