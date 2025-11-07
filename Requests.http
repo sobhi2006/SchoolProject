@@ -13,3 +13,17 @@ Content-Type: application/json
   "password": "SecurePassword123!",
   "confirmPassword": "SecurePassword123!"
 }
+
+###
+PUT http://localhost:5215/api/v1/user
+Content-Type: application/json
+
+{
+  "id": "c53ef0c3-a2b9-4189-b87f-50393d4606ee",
+  "fullName": "Doe",
+  "email": "john.doe@example.com",
+  "userName": "john",
+  "country": "Hu",
+  "address": "123 Main Street",
+  "phoneNumber": "036 30 123 4567"
+}
