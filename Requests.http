@@ -1,0 +1,15 @@
+
+###
+POST http://localhost:5215/api/v1/user
+Content-Type: application/json
+
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "userName": "johndoe",
+  "country": "Hungary",
+  "address": "123 Main Street, Szigetszentmiklós",
+  "phoneNumber": "+36 30 123 4567",
+  "password": "SecurePassword123!",
+  "confirmPassword": "SecurePassword123!"
+}
