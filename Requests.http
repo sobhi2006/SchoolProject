@@ -5,8 +5,8 @@ Content-Type: application/json
 
 {
   "fullName": "John Doe",
-  "email": "john.doe@example.com",
-  "userName": "johndoe",
+  "email": "koko.doe@example.com",
+  "userName": "koko",
   "country": "Hungary",
   "address": "123 Main Street, Szigetszentmiklós",
   "phoneNumber": "+36 30 123 4567",
@@ -26,4 +26,18 @@ Content-Type: application/json
   "country": "Hu",
   "address": "123 Main Street",
   "phoneNumber": "036 30 123 4567"
+}
+
+###
+DELETE http://localhost:5215/api/v1/user/3edf1272-251f-4ade-8e06-60016e03a78d
+
+###
+PUT http://localhost:5215/api/v1/user/change-password
+Content-Type: application/json
+
+{
+  "id": "c53ef0c3-a2b9-4189-b87f-50393d4606ee",
+  "oldpassword" : "SecurePassword123!",
+  "newpassword" : "Koko12@s",
+  "confirmedpassword" : "Koko12@s"
 }

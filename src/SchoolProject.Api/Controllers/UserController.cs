@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Controllers.Base;
-using SchoolProject.Core.Features.Departments.Queries.Models;
 using SchoolProject.Core.Features.Users.Commands.Models;
 using SchoolProject.Core.Features.Users.Queries.Models;
 
@@ -15,7 +14,7 @@ public class UserController : AppController
     public async Task<IActionResult> CreateUser([FromBody] AddUserCommand request)
     {
         var response = await Mediator.Send(request);
-        return Ok(response);
+        return NewResult(response);
     }
 
     [HttpGet("paginated")]
@@ -29,13 +28,27 @@ public class UserController : AppController
     public async Task<IActionResult> GetUserById(Guid id)
     {
         var response = await Mediator.Send(new GetUserByIdQuery(id));
-        return Ok(response);
+        return NewResult(response);
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUser([FromBody]UpdateUserCommand request)
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
     {
         var response = await Mediator.Send(request);
-        return Ok(response);
+        return NewResult(response);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteUser(Guid id)
+    {
+        var response = await Mediator.Send(new DeleteUserCommand(id));
+        return NewResult(response);
+    }
+
+    [HttpPut("change-password")]
+    public async Task<IActionResult> ChangePasswordUser([FromBody] ChangePasswordCommand request)
+    {
+        var response = await Mediator.Send(request);
+        return NewResult(response);
     }
 }
