@@ -41,3 +41,12 @@ Content-Type: application/json
   "newpassword" : "Koko12@s",
   "confirmedpassword" : "Koko12@s"
 }
+
+###
+POST http://localhost:5215/api/v1/authentication/signin
+Content-Type: application/json
+
+{
+    "UserName" : "john",
+    "Password" : "Koko12@s1"
+}
