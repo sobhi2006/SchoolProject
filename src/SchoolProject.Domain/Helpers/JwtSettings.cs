@@ -9,4 +9,6 @@ public class JwtSettings
     public bool ValidateAudience { get; set; }
     public bool ValidateLifetime { get; set; }
     public bool ValidateIssuerSigningKey { get; set; }
+    public int TokenExpiredInMinutes { get; set; }
+    public int RefreshTokenExpiredInDays { get; set; }
 }

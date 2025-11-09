@@ -9,7 +9,14 @@ namespace SchoolProject.Api.Controllers;
 public class AuthenticationController : AppController
 {
     [HttpPost("signin")]
-    public async Task<IActionResult> SignIn([FromBody]SignInCommand request)
+    public async Task<IActionResult> SignIn([FromBody] SignInCommand request)
+    {
+        var response = await Mediator.Send(request);
+        return NewResult(response);
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand request)
     {
         var response = await Mediator.Send(request);
         return NewResult(response);
