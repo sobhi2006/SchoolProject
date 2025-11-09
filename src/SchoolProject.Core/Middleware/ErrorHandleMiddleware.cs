@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Security;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,13 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
                     responseModel.StatusCode = HttpStatusCode.BadRequest;
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
+
+                case SecurityException e:
+                    responseModel.Message = e.Message;
+                    responseModel.StatusCode = HttpStatusCode.Unauthorized;
+                    response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    break;
+                    
                 case Exception e:
                     if (e.GetType().ToString()=="ApiException")
                     {

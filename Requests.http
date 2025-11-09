@@ -50,3 +50,16 @@ Content-Type: application/json
     "UserName" : "john",
     "Password" : "Koko12@s1"
 }
+
+
+###
+POST http://localhost:5215/api/v1/authentication/refresh-token
+Content-Type: application/json
+
+{
+    "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWIiOiJjNTNlZjBjMy1hMmI5LTQxODktYjg3Zi01MDM5M2Q0NjA2ZWUiLCJVc2VyTmFtZSI6ImpvaG4iLCJFbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwiZXhwIjoxNzYyNjk2MTY3LCJpc3MiOiJTY2hvb2xQcm9qZWN0IiwiYXVkIjoiYXVkaWVuY2UifQ.3kkf2xJLoXwpdq7IlolSShfBcmRk0rdL3XdwHPRhhjg",
+    "refreshToken" : "Tiudv2Qr3tcil4ib0qbg0OUrBFgyP8aQTpXj8k/ouGAKTUioFRqChxpj5WcVjSt1y15OCG+2xCW3UgPZZ3X7UQ=="
+}
+###
+GET http://localhost:5215/api/v1/student/pagination?PageNumber=1&pagesize=9&orderby=1&search=l
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWIiOiJjNTNlZjBjMy1hMmI5LTQxODktYjg3Zi01MDM5M2Q0NjA2ZWUiLCJVc2VyTmFtZSI6ImpvaG4iLCJFbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwiZXhwIjoxNzYyNjkwNjcxLCJpc3MiOiJTY2hvb2xQcm9qZWN0IiwiYXVkIjoiYXVkaWVuY2UifQ.ZwRrL1JvGB5AEEhZqnKLtKt9AAghRBXboQrVAplRz_E
