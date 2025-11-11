@@ -14,7 +14,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
     public DbSet<DepartmentSubject> DepartmentSubjects => Set<DepartmentSubject>();
     public DbSet<StudentSubject> StudentSubjects => Set<StudentSubject>();
     public DbSet<Instructor> Instructors => Set<Instructor>();
-    public DbSet<InstructorSubject> InstructorSubjects => Set<InstructorSubject>();
     public DbSet<UserRefreshToken> UserRefreshTokens => Set<UserRefreshToken>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
