@@ -3,6 +3,7 @@ using System.Security;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +24,7 @@ public class AuthenticationService(JwtSettings jwtSetting,
 
     public async Task<JwtResponse> GenerateToken(User user)
     {
-        var Token = GenerateJwtToken(user);
+        var Token = await GenerateJwtToken(user);
         var RefreshToken = new RefreshToken
         {
             UserName = user.UserName!,
@@ -66,7 +67,7 @@ public class AuthenticationService(JwtSettings jwtSetting,
             throw new SecurityException("Refresh Token is expired");
 
         var user = await _userManager.FindByIdAsync(userId) ?? throw new SecurityException("User not found");
-        var Token = GenerateJwtToken(user);
+        var Token = await GenerateJwtToken(user);
 
         userRefreshToken.AccessToken = Token;
         await _refreshTokenRepository.UpdateAsync(userRefreshToken);
@@ -115,14 +116,19 @@ public class AuthenticationService(JwtSettings jwtSetting,
         return Convert.ToBase64String(randomNumber);
     }
 
-    private string GenerateJwtToken(User user)
+    private async Task<string> GenerateJwtToken(User user)
     {
+        var userRoles = await _userManager.GetRolesAsync(user);
         var Claims = new List<Claim>
         {
             new ("Sub", user.Id),
             new ("UserName", user.UserName!),
             new ("Email", user.Email!),
         };
+        
+        var RolesWithClaimsType = userRoles.Select(r => new Claim(ClaimTypes.Role, r));
+        Claims.AddRange(RolesWithClaimsType);
+
         var jwtToken = new JwtSecurityToken(_jwtSettings.Issuer, _jwtSettings.Audience, Claims, null, DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpiredInMinutes),
                         new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256));
         var Token = new JwtSecurityTokenHandler().WriteToken(jwtToken);

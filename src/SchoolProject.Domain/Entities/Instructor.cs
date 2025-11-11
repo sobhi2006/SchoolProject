@@ -13,5 +13,4 @@ public class Instructor
     public Instructor? Supervisor { get; set; }
     public Guid? SupervisorId { get; set; }
     public virtual ICollection<Instructor> Instructors { get; set; } = [];
-    public virtual ICollection<InstructorSubject> InstructorSubjects { get; set; } = [];
 }
