@@ -1,11 +1,14 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
 using SchoolProject.Core.Middleware;
+using SchoolProject.Domain.Entities.Identity;
 using SchoolProject.Infrastructure;
 using SchoolProject.Infrastructure.Data;
+using SchoolProject.Infrastructure.DataSeeding;
 using SchoolProject.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,5 +39,14 @@ app.UseCors("Any");
 app.MapControllers();
 app.MapGet("/", () => "Hello World!");
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
+    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+    await RoleSeed.SeedAsync(roleManager!);    
+    await UserSeed.SeedAsync(userManager!);    
+}
 
 app.Run();

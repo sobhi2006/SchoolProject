@@ -9,5 +9,4 @@ public class Subject
     public TimeSpan Period { get; set; }
     public virtual ICollection<StudentSubject> StudentSubjects { get; set; } = []; 
     public virtual ICollection<DepartmentSubject> DepartmentSubjects { get; set; } = []; 
-    public virtual ICollection<InstructorSubject> InstructorSubjects { get; set; } = []; 
 }

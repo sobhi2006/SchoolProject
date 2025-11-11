@@ -13,6 +13,7 @@ public static class ServiceDependency
         services.AddTransient<IInstructorService, InstructorService>();
         services.AddTransient<ISubjectService, SubjectService>();
         services.AddTransient<IAuthenticationService, AuthenticationService>();
+        services.AddTransient<IAuthorizationService, AuthorizationService>();
         return services;
     }
 }
