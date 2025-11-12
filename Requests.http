@@ -5,8 +5,8 @@ Content-Type: application/json
 
 {
   "fullName": "John Doe",
-  "email": "koko.doe@example.com",
-  "userName": "koko",
+  "email": "soubhy185@gmail.com",
+  "userName": "sop",
   "country": "Hungary",
   "address": "123 Main Street, Szigetszentmiklós",
   "phoneNumber": "+36 30 123 4567",
@@ -72,3 +72,21 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWIiOiJjNTNlZjBjM
 {
     "roleName" : ""
 }
+
+###
+POST http://localhost:5215/api/v1/Email/send-email
+Content-Type: application/json
+
+{
+    "email" : "soubhy185@gmail.com",
+    "message" : "https://www.youtube.com"
+}
+
+###
+POST http://localhost:5215/api/v1/authentication/confirm-email-ByCode?userId=c0b98884-1976-4c5a-94cf-a648a9cfaf7a&code=CfDJ8AxqxJPC52RLksVp8NZXM4yeSxAlAsMWQA7S4F0pjPMDmiSNd8asbKrK9caDr+nMJMfTt/F5sb3Um9JZt4rWWToPBtIzJNdxeSPQwxOrhBhV02rt+cXKjeu3+IlMV+s3vEaRKs9ngSqMPwLlvClK4mzuuOSVn5fzSJc69+n7FyEH1ish1eq35sXLvwc8+/vzQzw7ghNjEWS+nKLLzkEys80+UeAbOfquJAOg8/8Lb6Z8GYnsWAFaYQSsCdcEu3z2fA==
+Content-Type: application/json
+
+
+
+###
+POST http://localhost:5215/api/v1/authentication/code-email-confirm/c0b98884-1976-4c5a-94cf-a648a9cfaf7a

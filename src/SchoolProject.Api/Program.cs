@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
+using SchoolProject.Core.Filters;
 using SchoolProject.Core.Middleware;
 using SchoolProject.Domain.Entities.Identity;
 using SchoolProject.Infrastructure;
@@ -17,7 +18,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionString:DefaultConnection"]);
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<AuthFilter>();
+});
 builder.Services.AddInfrastructureDependency();
 builder.Services.AddServiceDependency();
 builder.Services.AddCoreDependency();
