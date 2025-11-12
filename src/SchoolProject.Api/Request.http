@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWIiOiJjNTNlZjBjM
 
 
 ###
-GET {{baseUrl}}/student/pagination?PageNumber=1&pagesize=9&orderby=1&search=l
+GET {{baseUrl}}/student/pagination?PageNumber=1&pagesize=9&orderby=1&search=a
 
 ###
 GET {{baseUrl}}/student/B95D40FA-A79B-43A3-9E39-02BC5BE8B664

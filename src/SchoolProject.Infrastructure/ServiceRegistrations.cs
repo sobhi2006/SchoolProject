@@ -24,7 +24,7 @@ public static class ServiceRegistrations
             options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 1;
 
-            options.SignIn.RequireConfirmedEmail = false;
+            options.SignIn.RequireConfirmedEmail = true;
             options.SignIn.RequireConfirmedPhoneNumber = false;
 
             options.User.AllowedUserNameCharacters =
