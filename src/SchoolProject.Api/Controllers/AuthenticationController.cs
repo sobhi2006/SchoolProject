@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Controllers.Base;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
@@ -9,6 +10,7 @@ namespace SchoolProject.Api.Controllers;
 [Route("api/v1/[Controller]")]
 public class AuthenticationController : AppController
 {
+    [AllowAnonymous]
     [HttpPost("signin")]
     public async Task<IActionResult> SignIn([FromBody] SignInCommand request)
     {
@@ -30,6 +32,7 @@ public class AuthenticationController : AppController
         return NewResult(response);
     }
 
+    [AllowAnonymous]
     [HttpPost("code-email-confirm/{UserId:guid}")]
     public async Task<IActionResult> GetCodeToConfirmEmail(Guid UserId)
     {

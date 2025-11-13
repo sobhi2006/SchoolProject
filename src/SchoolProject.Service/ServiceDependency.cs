@@ -18,6 +18,7 @@ public static class ServiceDependency
         services.AddTransient<IAuthorizationService, AuthorizationService>();
         services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<ICurrentUserService, CurrentUserService>();
+        services.AddTransient<IImageService, ImageService>();
         return services;
     }
 }
