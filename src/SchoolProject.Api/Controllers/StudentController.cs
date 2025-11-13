@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Controllers.Base;
 using SchoolProject.Core.Features.Queries.Models;
 using SchoolProject.Core.Features.Students.Commands.Models;
+using Serilog;
 
 namespace SchoolProject.Api.Controllers;
 
@@ -23,6 +24,7 @@ public class StudentController : AppController
     [AllowAnonymous]
     public async Task<IActionResult> GetStudentsPagination([FromQuery] GetStudentPaginatedListQuery request)
     {
+        Log.Information("Hello world form serilog");
         var response = await Mediator.Send(request);
         return Ok(response);
     }
