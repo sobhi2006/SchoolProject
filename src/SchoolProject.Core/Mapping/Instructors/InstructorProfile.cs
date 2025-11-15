@@ -6,5 +6,7 @@ public partial class InstructorProfile : Profile
     public InstructorProfile()
     {
         AddInstructorMapping();
+        UpdateInstructorMapping();
+        GetInstructorMapping();
     }
 }
