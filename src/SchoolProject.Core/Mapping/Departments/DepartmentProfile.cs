@@ -7,5 +7,7 @@ public partial class DepartmentProfile : Profile
     public DepartmentProfile()
     {
         GetDepartmentMapping();
+        AddDepartmentMapping();
+        UpdateDepartmentMapping();
     }
 }

@@ -24,7 +24,6 @@ public class StudentController : AppController
     [AllowAnonymous]
     public async Task<IActionResult> GetStudentsPagination([FromQuery] GetStudentPaginatedListQuery request)
     {
-        Log.Information("Hello world form serilog");
         var response = await Mediator.Send(request);
         return Ok(response);
     }
