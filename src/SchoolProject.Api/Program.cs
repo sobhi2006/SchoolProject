@@ -60,5 +60,7 @@ using (var scope = app.Services.CreateScope())
     await RoleSeed.SeedAsync(roleManager!);    
     await UserSeed.SeedAsync(userManager!);    
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();

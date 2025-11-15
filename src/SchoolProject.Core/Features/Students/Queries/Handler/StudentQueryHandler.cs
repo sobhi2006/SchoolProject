@@ -24,7 +24,7 @@ public class StudentQueryHandler(IStudentService studentService,
         var studentsMapped = _mapper.Map<List<GetStudentResponse>>(students);
 
         var result = Success(studentsMapped);
-        result.Meta = new { Count = result.Data.Count };
+        result.Meta = new { Count = result.Data?.Count };
         return result;
     }
 
