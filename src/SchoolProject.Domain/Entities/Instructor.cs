@@ -12,6 +12,6 @@ public class Instructor
     public Department DepartmentManager { get; set; } = null!;
     public Instructor? Supervisor { get; set; }
     public Guid? SupervisorId { get; set; }
+    public string? ImageUrl { get; set; }
     public virtual ICollection<Instructor> Instructors { get; set; } = [];
-    public virtual ICollection<InstructorSubject> InstructorSubjects { get; set; } = [];
 }

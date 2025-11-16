@@ -26,12 +26,16 @@ Content-Type: application/json
 
 ###
 GET {{baseUrl}}/student
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWIiOiJjNTNlZjBjMy1hMmI5LTQxODktYjg3Zi01MDM5M2Q0NjA2ZWUiLCJVc2VyTmFtZSI6ImpvaG4iLCJFbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwiZXhwIjoxNzYyNjAzMDkzLCJpc3MiOiJTY2hvb2xQcm9qZWN0IiwiYXVkIjoiYXVkaWVuY2UifQ.SS3a-zPhSKSc4muxxbJRTrVLxKnWT_YPpngPt4wpF44
+
 
 ###
-GET {{baseUrl}}/student/pagination?PageNumber=1&pagesize=9&orderby=1&search=l
+GET {{baseUrl}}/student/pagination?PageNumber=1&pagesize=9&orderby=1&search=a
 
 ###
 GET {{baseUrl}}/student/B95D40FA-A79B-43A3-9E39-02BC5BE8B664
 
 ###
 DELETE {{baseUrl}}/student/B95D40FA-A79B-43A3-9E39-02BC5BE8B664
+
+

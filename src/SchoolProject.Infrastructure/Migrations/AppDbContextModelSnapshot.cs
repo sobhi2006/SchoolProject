@@ -207,7 +207,6 @@ namespace SchoolProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -215,7 +214,6 @@ namespace SchoolProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -224,6 +222,10 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -271,6 +273,37 @@ namespace SchoolProject.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SchoolProject.Domain.Entities.Identity.UserRefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccessToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRefreshTokens");
+                });
+
             modelBuilder.Entity("SchoolProject.Domain.Entities.Instructor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -283,6 +316,9 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -305,27 +341,6 @@ namespace SchoolProject.Infrastructure.Migrations
                     b.HasIndex("SupervisorId");
 
                     b.ToTable("Instructors", (string)null);
-                });
-
-            modelBuilder.Entity("SchoolProject.Domain.Entities.InstructorSubject", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("InstructorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InstructorId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("InstructorSubjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Domain.Entities.Student", b =>
@@ -479,6 +494,17 @@ namespace SchoolProject.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("SchoolProject.Domain.Entities.Identity.UserRefreshToken", b =>
+                {
+                    b.HasOne("SchoolProject.Domain.Entities.Identity.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SchoolProject.Domain.Entities.Instructor", b =>
                 {
                     b.HasOne("SchoolProject.Domain.Entities.Department", "Department")
@@ -495,25 +521,6 @@ namespace SchoolProject.Infrastructure.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Supervisor");
-                });
-
-            modelBuilder.Entity("SchoolProject.Domain.Entities.InstructorSubject", b =>
-                {
-                    b.HasOne("SchoolProject.Domain.Entities.Instructor", "Instructor")
-                        .WithMany("InstructorSubjects")
-                        .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchoolProject.Domain.Entities.Subject", "Subject")
-                        .WithMany("InstructorSubjects")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Instructor");
-
-                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("SchoolProject.Domain.Entities.Student", b =>
@@ -555,12 +562,15 @@ namespace SchoolProject.Infrastructure.Migrations
                     b.Navigation("Students");
                 });
 
+            modelBuilder.Entity("SchoolProject.Domain.Entities.Identity.User", b =>
+                {
+                    b.Navigation("RefreshTokens");
+                });
+
             modelBuilder.Entity("SchoolProject.Domain.Entities.Instructor", b =>
                 {
                     b.Navigation("DepartmentManager")
                         .IsRequired();
-
-                    b.Navigation("InstructorSubjects");
 
                     b.Navigation("Instructors");
                 });
@@ -573,8 +583,6 @@ namespace SchoolProject.Infrastructure.Migrations
             modelBuilder.Entity("SchoolProject.Domain.Entities.Subject", b =>
                 {
                     b.Navigation("DepartmentSubjects");
-
-                    b.Navigation("InstructorSubjects");
 
                     b.Navigation("StudentSubjects");
                 });

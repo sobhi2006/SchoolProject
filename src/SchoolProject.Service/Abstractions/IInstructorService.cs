@@ -1,8 +1,15 @@
+using Microsoft.AspNetCore.Http;
 using SchoolProject.Domain.Entities;
 
 namespace SchoolProject.Service.Abstractions;
 
 public interface IInstructorService
 {
-    public Task<Instructor?> GetDepartmentByIdAsync(Guid Id);
+    Task<bool> IsExistInstructor(string Name);
+    Task<bool> IsExistInstructor(Guid Id);
+    Task<bool> AddInstructorAsync(Instructor instructor, IFormFile file);
+    public Task UpdateInstructorAsync(Instructor Instructor);
+    public Task<bool> DeleteInstructorAsync(Guid InstructorId);
+    public IQueryable<Instructor> GetQueryableInstructor();
+    public Task<Instructor?> GetInstructorById(Guid Id);
 }
