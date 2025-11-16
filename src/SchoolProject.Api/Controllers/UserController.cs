@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Controllers.Base;
 using SchoolProject.Core.Features.Users.Commands.Models;
@@ -7,7 +8,7 @@ namespace SchoolProject.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
-
+[Authorize]
 public class UserController : AppController
 {
     [HttpPost]
@@ -46,6 +47,7 @@ public class UserController : AppController
     }
 
     [HttpPut("change-password")]
+    [Authorize]
     public async Task<IActionResult> ChangePasswordUser([FromBody] ChangePasswordCommand request)
     {
         var response = await Mediator.Send(request);

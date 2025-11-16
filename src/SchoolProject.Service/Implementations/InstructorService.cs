@@ -1,3 +1,4 @@
+using System.Transactions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Domain.Entities;
@@ -53,8 +54,12 @@ public class InstructorService(IInstructorRepository instructorRepository, IImag
         return await _instructorRepository.GetTableNoTracking().AnyAsync(i => i.Id == Id);
     }
 
-    public async Task UpdateInstructorAsync(Instructor Instructor)
+    public async Task UpdateInstructorAsync(Instructor Instructor, IFormFile file)
     {
+        using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+        var imgUrl = await _imageService.SaveImageAsync(file, "Instructors");
+        Instructor.ImageUrl = imgUrl;
         await _instructorRepository.UpdateAsync(Instructor);
+        scope.Complete();
     }
 }

@@ -19,6 +19,10 @@
     <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="9.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>

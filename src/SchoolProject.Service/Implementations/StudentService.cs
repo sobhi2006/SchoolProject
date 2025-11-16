@@ -90,4 +90,9 @@ public class StudentService(IStudentRepository studentRepository) : IStudentServ
         }
         return query;
     }
+
+    public async Task<bool> IsExistById(Guid studnetId)
+    {
+        return await _studentRepository.GetTableNoTracking().Where(s => s.Id == studnetId).AnyAsync();
+    }
 }
