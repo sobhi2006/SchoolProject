@@ -8,6 +8,7 @@ namespace SchoolProject.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
+[Authorize]
 public class AuthenticationController : AppController
 {
     [AllowAnonymous]

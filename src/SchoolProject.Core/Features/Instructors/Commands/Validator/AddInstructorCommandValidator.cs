@@ -34,7 +34,7 @@ public class AddInstructorCommandValidator : AbstractValidator<AddInstructorComm
 
 
         RuleFor(i => i.Name)
-            .MustAsync(async (key, model) => await instructorService.IsExistInstructor(key))
+            .MustAsync(async (key, model) => !await instructorService.IsExistInstructor(key))
             .WithMessage("Instructor was found");
     }
 }

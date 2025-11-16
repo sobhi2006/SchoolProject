@@ -19,7 +19,8 @@ public static class UserSeed
                 Country = "Syria",
                 FullName = "Sobhi Hazouri",
                 PhoneNumber = "1234567890",
-                UserName = "Admin"
+                UserName = "Admin",
+                EmailConfirmed = true
             };
             var result = await userManager.CreateAsync(DefaultUser, "Admin1234@");
             System.Console.WriteLine(result.Succeeded? "\n\n\n\n\n\n\n\n\n Success" : 

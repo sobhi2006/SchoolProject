@@ -8,11 +8,7 @@ public partial class DepartmentProfile
     public void GetDepartmentMapping()
     {
         CreateMap<Department, DepartmentResponse>()
-                .ForMember(dr => dr.ManagerName, options => options.MapFrom(d => d.Manager.Name))
-                .ForMember(dr => dr.Subjects, options => options.MapFrom(d => d.DepartmentSubjects));
-        CreateMap<DepartmentSubject, SubjectResponse>()
-                .ForMember(dr => dr.Id, options => options.MapFrom(d => d.SubjectId))
-                .ForMember(dr => dr.SubjectName, options => options.MapFrom(d => d.Subject.SubjectName));
+                .ForMember(dr => dr.ManagerName, options => options.MapFrom(d => d.Manager.Name));
         CreateMap<Student, StudentResponse>();
         CreateMap<Instructor, InstructorResponse>();
     }

@@ -9,7 +9,7 @@ namespace SchoolProject.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 
 public class AuthorizationController : AppController
 {
@@ -35,6 +35,7 @@ public class AuthorizationController : AppController
     }
 
     [HttpGet("roles-list")]
+    [Authorize]
     public async Task<IActionResult> GetRolesList()
     {
         var response = await Mediator.Send(new GetRolesListQuery());
@@ -42,6 +43,7 @@ public class AuthorizationController : AppController
     }
 
     [HttpGet("role/{Id:guid}")]
+    [Authorize]
     public async Task<IActionResult> GetRoleById(Guid Id)
     {
         var response = await Mediator.Send(new DeleteRoleCommand(Id));

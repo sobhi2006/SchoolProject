@@ -27,7 +27,7 @@ public class InstructorCommandHandler(IInstructorService instructorService, IMap
     public async Task<Response<string>> Handle(UpdateInstructorCommand request, CancellationToken cancellationToken)
     {
         var InstructorMapped = _mapper.Map<Instructor>(request);
-        await _InstructorService.UpdateInstructorAsync(InstructorMapped);
+        await _InstructorService.UpdateInstructorAsync(InstructorMapped, request.Image);
         return Success<string>("Updated Successfully");
     }
 

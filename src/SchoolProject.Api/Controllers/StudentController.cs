@@ -21,14 +21,12 @@ public class StudentController : AppController
     }
 
     [HttpGet("pagination")]
-    [AllowAnonymous]
     public async Task<IActionResult> GetStudentsPagination([FromQuery] GetStudentPaginatedListQuery request)
     {
         var response = await Mediator.Send(request);
         return Ok(response);
     }
 
-    [AllowAnonymous]
     [HttpGet("{Id:guid}")]
     public async Task<IActionResult> GetStudentById(Guid Id)
     {

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Controllers.Base;
 using SchoolProject.Core.Features.Subjects.Commands.Models;
@@ -7,6 +8,7 @@ namespace SchoolProject.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
+[Authorize]
 
 public class SubjectController : AppController
 {

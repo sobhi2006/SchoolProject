@@ -9,6 +9,7 @@ public interface IStudentService
     public Task<Student?> GetStudentByIdAsync(Guid Id);
     public Task<Student?> AddAsync(Student student);
     public Task<bool> IsExistByName(string Name);
+    public Task<bool> IsExistById(Guid studnetId);
     public Task<bool> IsExistByNameExclude(string Name, Guid Id);
     public Task<Student?> UpdateAsync(Student student);
     public Task<Student?> DeleteAsync(Student student);
