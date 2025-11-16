@@ -29,7 +29,7 @@ public class EmailService(UserManager<User> userManager) : IEmailService
         {
             using var client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587);
-            await client.AuthenticateAsync("sobhihazouri2006@gmail.com", "bdsljewrgufofzgn");
+            await client.AuthenticateAsync("sobhihazouri2006@gmail.com", "*********");
             var BodyBuilder = new BodyBuilder()
             {
                 HtmlBody = $"{Message}",
